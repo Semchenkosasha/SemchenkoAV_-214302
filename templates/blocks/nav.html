@@ -1,0 +1,33 @@
+<nav th:fragment="nav" class="navbar navbar-expand-lg fixed-top bg-dark navbar-dark" id="mainNav">
+    <div class="container">
+        <span class="navbar-brand">Order Management</span>
+        <button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right"
+                type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto text-uppercase align-items-center text-center">
+                <li th:if="${role == 'SUP' or role == 'ADMIN'}" class="nav-item"><a class="nav-link" href="/stats">Статистика</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item"><a class="nav-link" href="/products">Товары</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item"><a class="nav-link" href="/sups">Поставщики</a></li>
+                <li th:if="${role == 'ADMIN'}" class="nav-item"><a class="nav-link" href="/profiles">Профили</a></li>
+                <li th:if="${role == 'SUP' or role == 'MANAGER'}" class="nav-item"><a class="nav-link" href="/contracts">Заказы</a></li>
+                <li th:if="${role == 'SUP' or role == 'MANAGER'}" class="nav-item"><a class="nav-link" href="/contracts/archive">Архив</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item">
+                    <div class="dropdown" style="padding: 8px 16px;">
+                        <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#">Список</a>
+                        <div class="dropdown-menu">
+                            <a th:if="${role == 'MANAGER'}" class="dropdown-item" href="/profile">Профиль</a>
+                            <a th:if="${role == 'SUP'}" class="dropdown-item" href="/supProfile">Данные</a>
+                            <a th:if="${role == 'SUP'}" class="dropdown-item" href="/categories">Категории</a>
+                            <a class="dropdown-item" href="/about">О&nbsp;нас</a>
+                        </div>
+                    </div>
+                </li>
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="nav-link" href="/login">Вход</a></li>
+                <li th:if="${role == 'NOT'}" class="nav-item"><a class="nav-link" href="/reg">Регистрация</a></li>
+                <li th:if="${role != 'NOT'}" class="nav-item"><a class="nav-link" href="/logout">Выход</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

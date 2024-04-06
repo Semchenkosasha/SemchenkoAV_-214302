@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Поставщики</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="text-uppercase section-heading">Поставщики</h2>
+            </div>
+        </div>
+        <form action="/sups/filter" class="mb-3" method="get">
+            <div class="row">
+                <div class="col-auto">
+                    <a href="/sups" class="btn btn-info">Сбросить</a>
+                </div>
+                <div class="col">
+                    <input type="text" name="name" class="form-control" placeholder="Имя" th:value="${name}">
+                </div>
+                <div class="col">
+                    <input type="number" name="score" class="form-control" min="0" step="1" max="10"
+                           placeholder="Оценка" required th:value="${score}">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Поиск</button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div th:each="i : ${sups}" class="col-4">
+                <div class="text-center" style="height: 300px">
+                <img class="rounded-5" th:src="${'/img/' + i.photo}" style="max-height: 300px;max-width: 100%;">
+                </div>
+                <p class="lead text-center" th:text="${i.name}"></p>
+                <span th:text="${'ФИО: ' + i.user.fio}"></span>
+                <br>
+                <span th:text="${'Контактные данные: ' + i.contact}"></span>
+                <br>
+                <span th:text="${'Логистическая компания: ' + i.company}"></span>
+                <br>
+                <span th:text="${'Адрес: ' + i.country}"></span>
+                <br>
+                <span th:text="${'Почта: ' + i.email}"></span>
+                <br>
+                <span th:text="${'Рейтинг: ' + i.score}"></span>
+                <br>
+                <span th:text="${'Количество товаров: ' + i.products.size()}"></span>
+                <br>
+                <a class="btn btn-info mt-2 w-100" th:href="${'/sups/' + i.id + '/reviews'}">Отзывы</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+</body>
+
+</html>

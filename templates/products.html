@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Товары</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="text-uppercase section-heading">Товары</h2>
+            </div>
+        </div>
+        <div th:if="${role == 'SUP'}" class="text-center">
+            <a href="/products/add" class="btn btn-primary mb-3 w-50">Добавить</a>
+        </div>
+        <form action="/products/filter" class="mb-3" method="get">
+            <div class="row">
+                <div class="col-auto">
+                    <a href="/products" class="btn btn-info">Сбросить</a>
+                </div>
+                <div class="col">
+                    <input type="text" name="name" class="form-control" placeholder="Имя" th:value="${name}">
+                </div>
+                <div class="col">
+                    <select name="categoryId" class="form-select" required>
+                        <option th:each="c : ${categories}" th:value="${c.id}" th:label="${c.name}"
+                                th:selected="${c.id == categoryId}"></option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <select name="filter" class="form-select" required>
+                        <option value="cheep" th:selected="${filter == 'cheep'}">Цена по возрастанию</option>
+                        <option value="expensive" th:selected="${filter == 'expensive'}">Цена по убыванию</option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Поиск</button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div th:each="i : ${products}" class="col-3" data-aos="fade-up-left">
+                <div style="height: 250px" class="text-center">
+                    <a th:href="${'/products/' + i.id}">
+                        <img class="rounded-5" th:src="${'/img/' + i.photo}" style="max-height: 250px;max-width: 100%;">
+                    </a>
+                </div>
+                <p class="lead text-center" th:text="${i.name}"></p>
+                <span th:text="${'Категория: ' + i.category.name}"></span>
+                <br>
+                <span th:text="${'Цена: ' + i.price + '$'}"></span>
+                <br>
+                <span th:text="${'Количество: ' + i.count}"></span>
+                <br>
+                <span th:text="${'Поставщик: ' + i.sup.name}"></span>
+                <div th:if="${i.sup.user.id == user.id}">
+                    <a th:href="${'/products/edit/' + i.id}" class="w-100 btn btn-info my-2">Редактировать</a>
+                    <a th:href="${'/products/delete/' + i.id}" class="w-100 btn btn-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+</body>
+
+</html>

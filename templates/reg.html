@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Регистрация</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+    <section>
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12 text-center">
+                    <h2 class="text-uppercase section-heading">Регистрация</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div th:if="${message}" class="text-center mt-20px">
+                        <div class="alert alert-info" role="alert">
+                            <strong><span th:text="${message}"></span></strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3"></div>
+            </div>
+            <form class="d-xl-flex justify-content-xl-center" method="post" action="/reg">
+                <div class="row">
+                    <div class="col-12 text-center mb-2">
+                        <input class="form-control" type="text" name="fio" placeholder="ФИО" required>
+                    </div>
+                    <div class="col-6 text-center">
+                        <input class="form-control" type="text" name="username" placeholder="Логин" required>
+                    </div>
+                    <div class="col-6 text-center">
+                        <input class="form-control" type="password" name="password" placeholder="Пароль" required>
+                    </div>
+                    <div class="col-12 text-center mt-2">
+                        <button class="btn btn-primary w-100" type="submit">Регистрация</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+</body>
+
+</html>

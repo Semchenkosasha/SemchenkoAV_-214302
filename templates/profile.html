@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Профиль</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<section>
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="text-uppercase section-heading">Профиль</h2>
+            </div>
+        </div>
+        <form method="post" action="/profile/edit">
+            <input class="form-control mb-3" type="text" name="fio" placeholder="ФИО" required th:value="${user.fio}">
+            <input class="form-control mb-3" type="email" name="email" placeholder="Эл. почта" required th:value="${user.email}">
+            <input class="form-control mb-3" type="tel" name="tel" placeholder="Контактные данные" required th:value="${user.tel}">
+            <input class="form-control mb-3" type="text" name="address" placeholder="Адрес" required th:value="${user.address}">
+            <button class="btn btn-success w-100" type="submit">Обновить данные</button>
+        </form>
+    </div>
+</section>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+</body>
+
+</html>

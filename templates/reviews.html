@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Отзывы</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<section>
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="text-uppercase section-heading">Отзывы</h2>
+            </div>
+        </div>
+        <form th:unless="${role == 'SUP'}" class="mb-5" method="post" th:action="${'/sups/' + sup.id + '/reviews/add'}">
+            <div class="row">
+                <div class="col">
+                    <input class="form-control" type="text" name="review" placeholder="Отзыв">
+                </div>
+                <div class="col-2">
+                    <input class="form-control" type="number" name="score" min="0" max="10" step="1"
+                           placeholder="Оценка" required>
+                </div>
+                <div class=" col-auto">
+                    <button class="btn btn-primary" type="submit">Добавить</button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div th:each="i : ${sup.reviews}" class="col-12 mb-3" data-aos="fade-up">
+                <p th:text="${i.owner.fio + ' | ' + i.date + ' | Оценка: ' + i.score}"></p>
+                <span th:text="${i.review}"></span>
+                <hr>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+</body>
+
+</html>

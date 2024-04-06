@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Редактировать</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<section>
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="text-uppercase section-heading">Редактировать</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div th:if="${message}" class="text-center mt-20px">
+                    <div class="alert alert-info" role="alert">
+                        <strong><span th:text="${message}"></span></strong>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3"></div>
+        </div>
+        <form class="d-xl-flex justify-content-xl-center" enctype="multipart/form-data" method="post" th:action="${'/products/edit/' + product.id}">
+            <div class="row" style="max-width: 70%;">
+                <div class="col-6 text-center mb-2">
+                    <input class="form-control" type="text" name="name" placeholder="Название" required th:value="${product.name}">
+                </div>
+                <div class="col-6 text-center mb-2">
+                    <input class="form-control" type="text" name="warehouse" placeholder="Склад" required th:value="${product.warehouse}">
+                </div>
+                <div class="col-6 text-center mb-2">
+                    <select class="form-select" name="categoryId" required>
+                        <option th:each="c : ${categories}" th:value="${c.id}" th:label="${c.name}" th:selected="${product.category.id == c.id}"></option>
+                    </select>
+                </div>
+                <div class="col-6 text-center mb-2">
+                    <input class="form-control" type="number" placeholder="Цена" name="price" min="0.01" max="2500"
+                           step="0.01" required th:value="${product.price}">
+                </div>
+                <div class="col-6 text-center mb-2">
+                    <input class="form-control" type="number" placeholder="Количество" name="count" min="1"
+                           step="1" required th:value="${product.count}">
+                </div>
+                <div class="col-6 text-center mb-2">
+                    <input class="form-control" type="file" accept="image/*" name="photo">
+                </div>
+                <div class="col-6 text-center mb-2">
+                    <input class="form-control" type="number" placeholder="Год выпуска" name="year" min="1" max="10000"
+                           step="1" required th:value="${product.year}">
+                </div>
+                <div class="col-6 text-center mb-2">
+                    <input class="form-control" type="number" placeholder="Срок службы" name="term" min="1" max="10000"
+                           step="1" required th:value="${product.term}">
+                </div>
+                <div class="col-12 text-center mb-2">
+                    <input class="form-control" type="text" name="description" placeholder="Описание (опционально)" th:value="${product.description}">
+                </div>
+                <div class="col-12 text-center mb-2">
+                    <button class="btn btn-primary w-100" type="submit">Обновить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+</body>
+
+</html>

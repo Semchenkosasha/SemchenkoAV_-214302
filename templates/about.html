@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>О нас</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<section class="py-5 my-5">
+    <div class="container py-5">
+        <div class="row mb-2">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="display-6 fw-bold text-center mb-5">
+                    <span class="underline pb-1"><strong>О нас</strong></span>
+                </h2>
+            </div>
+        </div>
+
+        <p align="justify">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium est eum facilis nulla, quae quasi
+            quibusdam quod quos vel? Accusantium alias aperiam blanditiis, eum nisi nulla quae quasi sint velit.
+        </p>
+        <p align="justify">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor dolorum libero qui quisquam rem, vitae.
+            Accusamus alias at cum, delectus, eaque enim exercitationem expedita harum illum maiores quos sunt
+            voluptatem.
+        </p>
+        <p align="justify">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut exercitationem inventore magnam obcaecati rem.
+            Corporis eius est fugit hic laborum magnam minus non, repudiandae. Assumenda atque consectetur fuga quisquam
+            suscipit?
+        </p>
+
+    </div>
+</section>
+
+<footer th:insert="blocks/footer :: footer" class="page-footer dark mt-auto"></footer>
+
+</body>
+
+</html>

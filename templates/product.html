@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${product.name}"></title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body>
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<section>
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="text-uppercase section-heading" th:text="${product.name}"></h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 text-center">
+                <img class="rounded-5" style="max-width: 100%;max-height: 500px" th:src="${'/img/' + product.photo}">
+            </div>
+            <div class="col-8">
+                <span th:text="${'Категория: ' + product.category.name}"></span>
+                <br>
+                <span th:text="${'Цена: ' + product.price + '$'}"></span>
+                <br>
+                <span th:text="${'Количество: ' + product.count}"></span>
+                <br>
+                <span th:text="${'Склад: ' + product.warehouse}"></span>
+                <br>
+                <span th:text="${'Год выпуска: ' + product.year}"></span>
+                <br>
+                <span th:text="${'Срок службы: ' + product.term}"></span>
+                <br>
+                <span th:text="${'Поставщик: ' + product.sup.name}"></span>
+                <br>
+                <span th:text="${'Адрес: ' + product.sup.country}"></span>
+                <br>
+                <span th:unless="${product.description.isEmpty()}"
+                      th:text="${'Описание: ' + product.description}"></span>
+                <form th:if="${role == 'MANAGER'}" method="post" th:action="${'/products/contract/' + product.id}">
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <input class="form-control" type="number" name="quantity" min="1" max="2500" step="1"
+                                   placeholder="Количество" required>
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="date" name="dateEnd" required
+                                   onfocus="this.min=new Date().toISOString().split('T')[0]">
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-primary" type="submit">Заказать</button>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <input class="form-control" type="text" name="description" required
+                                   placeholder="Адрес">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:insert="blocks/footer :: footer"></footer>
+
+</body>
+
+</html>
